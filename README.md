@@ -90,7 +90,7 @@ Combines frequency sharpening with adaptive contrast enhancement for better medi
 ```python
 first = cv2.imread(r"D:\computer vision\xray.jpeg", 0)
 #Make sure the image is loaded in grayscale mode using 0.
-ؤ
+
 #choose which method you will use or see the comparison of the 4 methods
 
 compare_results(
@@ -101,3 +101,54 @@ compare_results(
     pipeline_enhance_xray(first)
 )
 ```
+
+# Task 6: Transformed Object Recognition (SIFT)
+
+---
+
+## Objective
+
+Detect and match objects even under geometric transformations such as:
+
+- Rotation  
+- Translation  
+- Slight scaling or distortion  
+
+The system is designed to recognize the same object even if its appearance changes due to viewpoint or transformation.
+
+---
+
+## Methodology
+
+The system is based on classical feature-based computer vision techniques:
+
+- **SIFT (Scale-Invariant Feature Transform)**  
+- **Brute Force Matcher (BFMatcher)**  
+- **KNN Matching (k = 2)**  
+- **Lowe’s Ratio Test** for filtering unreliable matches  
+
+---
+
+## Workflow
+
+1. Detect keypoints using SIFT  
+2. Compute feature descriptors  
+3. Match descriptors using KNN (k=2)  
+4. Apply Lowe’s Ratio Test to keep good matches  
+5. Decide if the object exists based on number of matches  
+6. Visualize matched keypoints on both images  
+
+---
+
+## How to Run Task 6
+
+### Step 1: Load Images
+
+```python
+a = cv2.imread(path of image1)
+b = cv2.imread(path of image 2)
+B, x, y = detect_and_match_features(a, b)
+show_mat(x, y, B)
+```
+if there is a common object the show_mat function will tell you and show you the common object
+if there is no common object it will tell you no common object and will now show you anything
